@@ -60,8 +60,11 @@ namespace System.Web.Mvc
 		{
 			ValidatorMethodData vmd = GetClientMethodData();
 
+			if(string.IsNullOrEmpty(vmd.Name) || string.IsNullOrEmpty(vmd.Function) || string.IsNullOrEmpty(vmd.ErrorMessage))
+				throw new ArgumentException("The ValidatorMethodData instance returned by the overridden method GetClientMethodData is invalid");
+
 			if(vmd != null)
-				methods.Add(string.Format("$.validator.addMethod({0},{1},{2});", vmd.Name, vmd.Function, vmd.ErrorMessage));
+				methods.Add(string.Format("$.validator.addMethod('{0}',{1},{2});", vmd.Name.Trim("'".ToCharArray()), vmd.Function, vmd.ErrorMessage));
 		}
 
 		public void AddClientRuleAndMessage(string element, List<string> rules, List<string> messages, ValidationSet validationSet)
@@ -105,6 +108,18 @@ namespace System.Web.Mvc
 		public virtual Validator[] Translate()
 		{
 			return new Validator[] { this };
+		}
+
+		protected virtual void AddError(string element, params object[] args)
+		{
+			InvalidElements.Add(element);
+			ErrorMessages.Add(element, string.Format(ErrorMessageFormat, GetLocalizedLabel(element), args));
+		}
+
+		protected virtual string GetLocalizedLabel(string element)
+		{
+			string label = ValidationSet.GetLocalizedText(element);
+			return string.IsNullOrEmpty(label) ? element : label;
 		}
 
 		protected virtual string GetDefaultErrorMessageFormat()

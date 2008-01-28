@@ -58,14 +58,49 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\LoginValidationSet.cs" />
+    <Compile Include="App_GlobalResources\Sample1ValidationSet.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sample1ValidationSet.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Sample1ValidationSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sample1ValidationSet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ValidationSet.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationSet.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\ValidationSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationSet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Sample3ValidationSet.cs" />
+    <Compile Include="Code\Sample2ValidationSet.cs" />
+    <Compile Include="Code\Sample1ValidationSet.cs" />
     <Compile Include="Code\ValidateBuga.cs" />
+    <Compile Include="Controllers\SampleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Sample\Sample2.aspx.cs">
+      <DependentUpon>Sample2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Sample\SampleResult.aspx.cs">
+      <DependentUpon>SampleResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Sample\Sample1.aspx.cs">
+      <DependentUpon>Sample1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Home\Index.aspx.cs">
@@ -78,8 +113,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx" />
+    <Content Include="Content\jDate.js" />
+    <Content Include="Content\jQuery.Core.js" />
+    <Content Include="Content\jQuery.Delegate.js" />
+    <Content Include="Content\jQuery.Validation.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Views\Sample\Sample1.aspx" />
     <Content Include="Views\Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +127,36 @@
       <Project>{68516A50-2701-41AE-85E1-852846AAD8AC}</Project>
       <Name>MvcValidatorToolkit</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ValidationSet.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ValidationSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ValidationSet.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ValidationSet.de.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Sample1ValidationSet.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sample1ValidationSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Sample1ValidationSet.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sample1ValidationSet.de.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Sample\Sample2.aspx" />
+    <Content Include="Views\Sample\SampleResult.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -106,7 +176,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>64701</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>

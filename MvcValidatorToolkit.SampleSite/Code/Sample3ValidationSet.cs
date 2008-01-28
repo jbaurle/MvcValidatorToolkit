@@ -5,7 +5,7 @@ namespace MvcValidatorToolkit.SampleSite
 {
 	//[MessageOrder("...")]
 	//[MessageResourceName("...")]
-	public class LoginValidationSet : ValidationSet
+	public class Sample3ValidationSet : ValidationSet
 	{
 		string Username = "";
 		string Password = "";
@@ -16,8 +16,11 @@ namespace MvcValidatorToolkit.SampleSite
 			(
 				// NOTE: What happens if more than one Buga tests are checked?????
 
+				new ValidatePresence("username, password"),
+				new ValidateMinLength("username", 5),
+				new ValidateMinLength("password", 3)
 
-				new ValidatePresence("username, password")
+		
 				//new ValidateRange("password", 11, 15)
 				//new ValidateMin("password", 11),
 				//new ValidateMax("password", 15)
@@ -45,6 +48,7 @@ namespace MvcValidatorToolkit.SampleSite
 
 		protected override void OnValidate()
 		{
+			// TODO: Change!
 			if(Username.StartsWith("jbau") && Password.StartsWith("pac"))
 				throw new ValidatorException("username", "The combination is not valid");
 		}

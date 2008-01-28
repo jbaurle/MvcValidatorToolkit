@@ -11,7 +11,7 @@ namespace MvcValidatorToolkit.SampleSite
 		{
 		}
 
-		protected override ValidatorMethodData GetClientMethodData()
+		public override ValidatorMethodData GetClientMethodData()
 		{
 			return new ValidatorMethodData(
 				"buga",
@@ -20,36 +20,25 @@ namespace MvcValidatorToolkit.SampleSite
 			);
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "buga:true";
+		}
 
-				if(!Values.ContainsKey(element) || (Values[element] ?? string.Empty).Trim() != "buga")
-					AddError(element);
-			}
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("buga:'{0}'", GetLocalizedErrorMessage(element)).Replace("'", "\'");
+		}
+
+		protected override void Validate(string element)
+		{
+			if(Values.ContainsKey(element) == false || (Values[element] ?? string.Empty).Trim() != "buga")
+				InsertError(element);
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} must contain the value \"buga\"";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "buga:true";
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			// TODO: Change logic element is not needed?
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.Format("buga:'{0}'", string.Format(ErrorMessageFormat, label != null ? label : element)).Replace("'", "\'");
 		}
 	}
 }

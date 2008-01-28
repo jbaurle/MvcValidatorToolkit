@@ -30,12 +30,12 @@ namespace System.Web.Mvc
 		public string CreateClientScript(NameValueCollection errorMessages)
 		{
 			List<string> methods = new List<string>();
+			List<string> methodsCreated = new List<string>();
 			OrderedDictionary rules = new OrderedDictionary();
 			OrderedDictionary messages = new OrderedDictionary();
 			Dictionary<string, List<Type>> handledElements = new Dictionary<string, List<Type>>();
 
 			List<Validator> validators = new List<Validator>();
-
 			foreach(Validator validator in GetValidators().ToArray())
 				validators.AddRange(validator.Translate());
 
@@ -48,7 +48,19 @@ namespace System.Web.Mvc
 			{
 				InitialzeValidator(validator);
 
-				validator.AddClientMethodData(methods);
+				ValidatorMethodData vmd = validator.GetClientMethodData();
+
+				if(vmd != null)
+				{
+					if(string.IsNullOrEmpty(vmd.Name) || string.IsNullOrEmpty(vmd.Function) || string.IsNullOrEmpty(vmd.ErrorMessage))
+						throw new ArgumentException(string.Format("The ValidatorMethodData instance returned for validator type {0} is invalid", validator.GetType()));
+
+					if(!methodsCreated.Contains(vmd.Name))
+					{
+						methods.Add(string.Format("$.validator.addMethod('{0}',{1},{2});", vmd.Name.Trim("'".ToCharArray()), vmd.Function, vmd.ErrorMessage));
+						methodsCreated.Add(vmd.Name);
+					}
+				}
 
 				if(validator.ElementsToValidate != null)
 				{
@@ -74,7 +86,13 @@ namespace System.Web.Mvc
 						if(messages.Contains(element) == false)
 							messages.Add(element, new List<string>());
 
-						validator.AddClientRuleAndMessage(element, (List<string>)rules[element], (List<string>)messages[element], this);
+						string rule = validator.GetClientRule(element);
+						string message = validator.GetClientMessage(element);
+
+						if(!string.IsNullOrEmpty(rule))
+							((List<string>)rules[element]).Add(rule);
+						if(!string.IsNullOrEmpty(message))
+							((List<string>)messages[element]).Add(message);
 					}
 				}
 			}
@@ -138,13 +156,12 @@ namespace System.Web.Mvc
 
 			if(values == null)
 				throw new ArgumentNullException("values");
-
-			Values = values;
+			else
+				Values = values;
 
 			UpdateFields();
 
 			List<Validator> validators = new List<Validator>();
-
 			foreach(Validator validator in GetValidators().ToArray())
 				validators.AddRange(validator.Translate());
 
@@ -184,10 +201,12 @@ namespace System.Web.Mvc
 			return IsValid;
 		}
 
+		protected virtual void OnValidate()
+		{
+		}
+
 		public virtual string GetLocalizedText(string key)
 		{
-			// TODO: May extend logic to read resources from other locations than the App_GlobalResources folder?
-
 			if(ResourceManagerDefault == null && ResourceManager == null)
 			{
 				Assembly assembly = null;
@@ -274,7 +293,5 @@ namespace System.Web.Mvc
 
 			validator.Initialize(this, UsedTypes[vt]);
 		}
-
-		protected abstract void OnValidate();
 	}
 }

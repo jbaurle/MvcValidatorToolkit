@@ -33,7 +33,6 @@ namespace System.Web.Mvc
 
 					if(ElementsToValidate.Contains(element))
 						throw new ArgumentException("elementsToValidate");
-
 					if(element.Length > 0)
 						ElementsToValidate.Add(element);
 				}
@@ -56,33 +55,41 @@ namespace System.Web.Mvc
 				ErrorMessageFormat = GetDefaultErrorMessageFormat();
 		}
 
-		public void AddClientMethodData(List<string> methods)
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Validator[] Translate()
 		{
-			ValidatorMethodData vmd = GetClientMethodData();
-
-			if(string.IsNullOrEmpty(vmd.Name) || string.IsNullOrEmpty(vmd.Function) || string.IsNullOrEmpty(vmd.ErrorMessage))
-				throw new ArgumentException("The ValidatorMethodData instance returned by the overridden method GetClientMethodData is invalid");
-
-			if(vmd != null)
-				methods.Add(string.Format("$.validator.addMethod('{0}',{1},{2});", vmd.Name.Trim("'".ToCharArray()), vmd.Function, vmd.ErrorMessage));
+			return new Validator[] { this };
 		}
 
-		public void AddClientRuleAndMessage(string element, List<string> rules, List<string> messages, ValidationSet validationSet)
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual ValidatorMethodData GetClientMethodData()
 		{
-			if(!ElementsToValidate.Contains(element))
-				return;
-
-			ValidationSet = validationSet;
-
-			string rule = GetClientRule(element);
-			string message = GetClientMessage(element);
-
-			if(!string.IsNullOrEmpty(rule))
-				rules.Add(rule);
-			if(!string.IsNullOrEmpty(message))
-				messages.Add(message);
+			return null;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string GetClientRule(string element)
+		{
+			return string.Empty;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string GetClientMessage(string element)
+		{
+			return string.Empty;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool Validate(NameValueCollection values, ValidationSet validationSet, List<string> skipElements)
 		{
 			if(values == null)
@@ -97,7 +104,11 @@ namespace System.Web.Mvc
 			ErrorMessages = new NameValueCollection();
 			InvalidElements = new List<string>();
 
-			Validate(skipElements);
+			foreach(string element in ElementsToValidate)
+			{
+				if(!skipElements.Contains(element))
+					Validate(element);
+			}
 
 			if(ErrorMessages.Count > 0)
 				IsValid = false;
@@ -105,43 +116,49 @@ namespace System.Web.Mvc
 			return IsValid;
 		}
 
-		public virtual Validator[] Translate()
-		{
-			return new Validator[] { this };
-		}
+		/// <summary>
+		/// 
+		/// </summary>
+		protected abstract void Validate(string element);
 
-		protected virtual void AddError(string element, params object[] args)
+		/// <summary>
+		/// 
+		/// </summary>
+		protected virtual void InsertError(string element, params object[] args)
 		{
+			ErrorMessages.Add(element, GetLocalizedErrorMessage(element, args));
+
 			InvalidElements.Add(element);
-			ErrorMessages.Add(element, string.Format(ErrorMessageFormat, GetLocalizedLabel(element), args));
 		}
 
-		protected virtual string GetLocalizedLabel(string element)
-		{
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.IsNullOrEmpty(label) ? element : label;
-		}
-
+		/// <summary>
+		/// 
+		/// </summary>
 		protected virtual string GetDefaultErrorMessageFormat()
 		{
 			return ValidationSet.GetType().Name + "." + GetType().Name;
 		}
 
-		protected virtual ValidatorMethodData GetClientMethodData()
+		/// <summary>
+		/// 
+		/// </summary>
+		protected virtual string GetLocalizedLabel(string element)
 		{
-			return null;
+			string label = ValidationSet.GetLocalizedText(element);
+
+			return string.IsNullOrEmpty(label) ? element : label;
 		}
 
-		protected virtual string GetClientRule(string element)
+		/// <summary>
+		/// 
+		/// </summary>
+		protected virtual string GetLocalizedErrorMessage(string element, params object[] args)
 		{
-			return string.Empty;
-		}
+			List<object> al = new List<object>();
+			al.Add(GetLocalizedLabel(element));
+			al.AddRange(args);
 
-		protected virtual string GetClientMessage(string element)
-		{
-			return string.Empty;
+			return string.Format(ErrorMessageFormat, al.ToArray());
 		}
-
-		protected abstract void Validate(List<string> skipElements);
 	}
 }

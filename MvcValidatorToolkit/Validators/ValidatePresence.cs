@@ -10,40 +10,25 @@ namespace System.Web.Mvc
 		{
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "required:true";
+		}
 
-				if(!Values.ContainsKey(element) || (Values[element] ?? string.Empty).Trim().Length == 0)
-				{
-					InvalidElements.Add(element);
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("required:'{0}'", GetLocalizedErrorMessage(element)).Replace("'", "\'");
+		}
 
-					string label = ValidationSet.GetLocalizedText(element);
-					ErrorMessages.Add(element, string.Format(ErrorMessageFormat, (label != null ? label : element)));
-				}
-			}
+		protected override void Validate(string element)
+		{
+			if(Values.ContainsKey(element) == false || (Values[element] ?? string.Empty).Trim().Length == 0)
+				InsertError(element);
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} is required";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "required:true";
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.Format("required:'{0}'", string.Format(ErrorMessageFormat, (label != null ? label : element))).Replace("'", "\'");
 		}
 	}
 }

@@ -21,40 +21,25 @@ namespace System.Web.Mvc
 			MaxLength = maxLength;
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "maxLength:" + MaxLength;
+		}
 
-				if(!Values.ContainsKey(element) || (Values[element] ?? string.Empty).Trim().Length > MaxLength)
-				{
-					InvalidElements.Add(element);
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("maxLength:'{0}'", GetLocalizedErrorMessage(element, MaxLength)).Replace("'", "\'");
+		}
 
-					string label = ValidationSet.GetLocalizedText(element);
-					ErrorMessages.Add(element, string.Format(ErrorMessageFormat, (label != null ? label : element), MaxLength));
-				}
-			}
+		protected override void Validate(string element)
+		{
+			if(Values.ContainsKey(element) == false || (Values[element] ?? string.Empty).Trim().Length > MaxLength)
+				InsertError(element, MaxLength);
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} must contain a value value no longer than {1} characters";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "maxLength:" + MaxLength;
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.Format("maxLength:'{0}'", string.Format(ErrorMessageFormat, (label != null ? label : element), MaxLength)).Replace("'", "\'");
 		}
 	}
 }

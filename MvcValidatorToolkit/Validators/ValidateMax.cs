@@ -18,42 +18,27 @@ namespace System.Web.Mvc
 			Max = max;
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "max:" + Max;
+		}
 
-				int value;
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("max:'{0}'", GetLocalizedErrorMessage(element, Max)).Replace("'", "\'");
+		}
 
-				if(!Values.ContainsKey(element) || string.IsNullOrEmpty(Values[element]) || !int.TryParse(Values[element], out value) || value > Max)
-				{
-					InvalidElements.Add(element);
+		protected override void Validate(string element)
+		{
+			int value;
 
-					string label = ValidationSet.GetLocalizedText(element);
-					ErrorMessages.Add(element, string.Format(ErrorMessageFormat, (label != null ? label : element), Max));
-				}
-			}
+			if(!Values.ContainsKey(element) || string.IsNullOrEmpty(Values[element]) || !int.TryParse(Values[element], out value) || value > Max)
+				InsertError(element, Max);
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} must contain a value less than or equal to {1}";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "max:" + Max;
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.Format("max:'{0}'", string.Format(ErrorMessageFormat, (label != null ? label : element), Max)).Replace("'", "\'");
 		}
 	}
 }

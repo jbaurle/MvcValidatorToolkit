@@ -25,42 +25,27 @@ namespace System.Web.Mvc
 			MaxLength = maxLength;
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "rangeLength:[" + MinLength + "," + MaxLength + "]";
+		}
 
-				int length = (Values[element] ?? string.Empty).Trim().Length;
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("rangeLength:'{0}'", GetLocalizedErrorMessage(element, MinLength, MaxLength)).Replace("'", "\'");
+		}
 
-				if(!Values.ContainsKey(element) || length < MinLength || length > MaxLength)
-				{
-					InvalidElements.Add(element);
+		protected override void Validate(string element)
+		{
+			int length = (Values[element] ?? string.Empty).Trim().Length;
 
-					string label = ValidationSet.GetLocalizedText(element);
-					ErrorMessages.Add(element, string.Format(ErrorMessageFormat, (label != null ? label : element), MinLength, MaxLength));
-				}
-			}
+			if(Values.ContainsKey(element) == false || length < MinLength || length > MaxLength)
+				InsertError(element, MinLength, MaxLength);
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} must contain a value between {1} and {2} characters long";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "rangeLength:[" + MinLength + "," + MaxLength + "]";
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.Format("rangeLength:'{0}'", string.Format(ErrorMessageFormat, (label != null ? label : element), MinLength, MaxLength)).Replace("'", "\'");
 		}
 	}
 }

@@ -23,14 +23,16 @@ namespace System.Web.Mvc
 			// Get the validation set attribute
 			ValidationSetAttribute[] attributes = (ValidationSetAttribute[])mb.GetCustomAttributes(typeof(ValidationSetAttribute), false);
 
-			// Stop processing if none or more than one validation set is defined
+			// Stop processing if not exactly one validation set is defined
 			if(attributes.Length == 0)
 				throw new Exception("The ValidateForm method expects a ValidationSetAttribute defined for the calling controller action");
 			if(attributes.Length > 1)
 				throw new Exception("The ValidateForm method expects just one ValidationSetAttribute defined for the calling controller action");
 
+			// Get instance of the validation set class
 			ValidationSet vs = attributes[0].ValidationSet;
 
+			// Validate HTML form (Request.Form) and save the result in the ViewData collection
 			if(vs.Validate(controller.Request.Form))
 				controller.ViewData[vs.GetType().Name + ".ErrorMessages"] = null;
 			else

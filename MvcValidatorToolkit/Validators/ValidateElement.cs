@@ -6,6 +6,8 @@ namespace System.Web.Mvc
 	public class ValidateElement : Validator
 	{
 		public bool Required { get; set; }
+		public int Min { get; set; }
+		public int Max { get; set; }
 		public int MinLength { get; set; }
 		public int MaxLength { get; set; }
 
@@ -23,6 +25,13 @@ namespace System.Web.Mvc
 
 			if(Required)
 				attributes.Add(new ValidatePresence(element));
+
+			if(Min > 0 && Max > 0)
+				attributes.Add(new ValidateRange(element, Min, Max));
+			else if(Min > 0)
+				attributes.Add(new ValidateMin(element, Min));
+			else if(Max > 0)
+				attributes.Add(new ValidateMax(element, Max));
 
 			if(MinLength > 0 && MaxLength > 0)
 				attributes.Add(new ValidateRangeLength(element, MinLength, MaxLength));

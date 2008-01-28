@@ -34,7 +34,7 @@ namespace System.Web.Mvc
 			return attributes.ToArray();
 		}
 
-		protected override void Validate(List<string> skipElements)
+		protected override void Validate(string element)
 		{
 			// NOTE: This method is never called because the Translate method
 			// is not returning this instance as validator to use. 

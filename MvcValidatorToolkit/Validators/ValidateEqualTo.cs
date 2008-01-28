@@ -21,42 +21,25 @@ namespace System.Web.Mvc
 			ReferenceElement = referenceElement;
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "equalTo:'#" + ReferenceElement + "'";
+		}
 
-				if(!Values.ContainsKey(element) || !Values.ContainsKey(ReferenceElement) || (Values[element] ?? string.Empty) != (Values[ReferenceElement] ?? string.Empty))
-				{
-					InvalidElements.Add(element);
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("equalTo:'{0}'", GetLocalizedErrorMessage(element, ValidationSet.GetLocalizedText(ReferenceElement))).Replace("'", "\'");
+		}
 
-					string label = ValidationSet.GetLocalizedText(element);
-					string referenceLabel = ValidationSet.GetLocalizedText(ReferenceElement);
-					ErrorMessages.Add(element, string.Format(ErrorMessageFormat, (label != null ? label : element), (referenceLabel != null ? referenceLabel : ReferenceElement)));
-				}
-			}
+		protected override void Validate(string element)
+		{
+			if(Values.ContainsKey(element) == false || !Values.ContainsKey(ReferenceElement) || (Values[element] ?? string.Empty) != (Values[ReferenceElement] ?? string.Empty))
+				InsertError(element, ValidationSet.GetLocalizedText(ReferenceElement));
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} must contain the same value as the field {1}";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "equalTo:'#" + ReferenceElement + "'";
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			string label = ValidationSet.GetLocalizedText(element);
-			string referenceLabel = ValidationSet.GetLocalizedText(ReferenceElement);
-			return string.Format("equalTo:'{0}'", string.Format(ErrorMessageFormat, (label != null ? label : element), (referenceLabel != null ? referenceLabel : ReferenceElement))).Replace("'", "\'");
 		}
 	}
 }

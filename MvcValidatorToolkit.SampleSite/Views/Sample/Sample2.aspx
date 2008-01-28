@@ -5,9 +5,9 @@
 	<script type="text/javascript">
 		$(function(){
 			updateSettingsForSample2ValidationSet($('#sample2Form').validate({
-				errorContainer:$('#sample2FormSummary'),
-				errorLabelContainer:$('#sample2FormSummary ul'),
-				wrapper:'li',
+				errorPlacement:function(error,element){
+					error.appendTo(element.parent("td").next("td"));
+				},
 				rules:{}
 			}));
 		});
@@ -25,7 +25,8 @@
 
 	<h2>Sample Form #1</h2>
 
-	<p><i><b>NOTE:</b> ...</i></p>
+	<p><i><b>NOTE:</b> The form is displaying the error messages next to the field using the errorPlacement option 
+		of the jQuery validation plugin.</i></p>
 	
 	<div id="sample2FormSummary" style="display:none;"><%= Resources.ValidationSet.ValidationSummary_HeaderText %><ul></ul></div>
 
@@ -34,14 +35,46 @@
 		<tr>
 			<td>Username</td>
 			<td><input type="text" id="username" name="username" /></td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td>Password</td>
 			<td><input type="text" id="password" name="password" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Password again</td>
+			<td><input type="text" id="password2" name="password2" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td>
+				<input type="radio" name="gender" value="M" /> Male<br />
+				<input type="radio" name="gender" value="F" /> Female
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>Membership</td>
+			<td>
+				<select id="membership" name="membership">
+					<option value="">Please select...</option>
+					<option value="B">Basic</option>
+					<option value="P">Premium</option>
+				</select>
+			</td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td colspan="2"><input type="submit" value="Login" /></td>
+			<td><input type="checkbox" id="Checkbox1" name="termsOfService" /> I accept the terms of service</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="2"><input type="submit" value="Save" /></td>
+			<td>&nbsp;</td>
 		</tr>
 	</table>
 	</form>

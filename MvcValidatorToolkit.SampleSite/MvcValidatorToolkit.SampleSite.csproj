@@ -78,6 +78,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationSet.resx</DependentUpon>
     </Compile>
+    <Compile Include="Code\SampleSiteViewPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Code\Sample3ValidationSet.cs" />
     <Compile Include="Code\Sample2ValidationSet.cs" />
     <Compile Include="Code\Sample1ValidationSet.cs" />

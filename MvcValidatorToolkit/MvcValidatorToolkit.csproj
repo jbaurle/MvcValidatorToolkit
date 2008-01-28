@@ -61,7 +61,6 @@
     <Compile Include="ValidatorCollection.cs" />
     <Compile Include="ValidatorException.cs" />
     <Compile Include="ValidatorMethodData.cs" />
-    <Compile Include="Validators\ValidateCompareTo.cs" />
     <Compile Include="Validators\ValidateDate.cs" />
     <Compile Include="Validators\ValidateElement.cs" />
     <Compile Include="Validators\ValidateEqualTo.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="Validators\ValidatePresence.cs" />
     <Compile Include="Validators\ValidateRange.cs" />
     <Compile Include="Validators\ValidateRangeLength.cs" />
-    <Compile Include="Validators\ValidateRegEx.cs" />
     <Compile Include="Validators\ValidateScriptMethod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

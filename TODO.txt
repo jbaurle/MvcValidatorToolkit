@@ -2,6 +2,9 @@
 	TODO:
 	
 	 - Add new validators:
+	    - ValidateCreditCardNumber
 	    - ValidateCompareTo
+	    - ValidateEmailAddress
 	    - ValidateRegex
+	    - ValidateUrl
 	    

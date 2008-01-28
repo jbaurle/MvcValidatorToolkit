@@ -63,7 +63,6 @@
     <Compile Include="ValidatorMethodData.cs" />
     <Compile Include="Validators\ValidateCompareTo.cs" />
     <Compile Include="Validators\ValidateDate.cs" />
-    <Compile Include="Validators\ValidateDateSpecial.cs" />
     <Compile Include="Validators\ValidateElement.cs" />
     <Compile Include="Validators\ValidateEqualTo.cs" />
     <Compile Include="Validators\ValidateMax.cs" />

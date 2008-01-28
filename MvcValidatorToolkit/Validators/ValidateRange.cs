@@ -20,42 +20,27 @@ namespace System.Web.Mvc
 			Max = max;
 		}
 
-		protected override void Validate(List<string> skipElements)
+		public override string GetClientRule(string element)
 		{
-			foreach(string element in ElementsToValidate)
-			{
-				if(skipElements.Contains(element))
-					continue;
+			return "range:[" + Min + "," + Max + "]";
+		}
 
-				int value;
+		public override string GetClientMessage(string element)
+		{
+			return string.Format("range:'{0}'", GetLocalizedErrorMessage(element, Min, Max)).Replace("'", "\'");
+		}
 
-				if(!Values.ContainsKey(element) || string.IsNullOrEmpty(Values[element]) || !int.TryParse(Values[element], out value) || value < Min || value > Max)
-				{
-					InvalidElements.Add(element);
+		protected override void Validate(string element)
+		{
+			int value;
 
-					string label = ValidationSet.GetLocalizedText(element);
-					ErrorMessages.Add(element, string.Format(ErrorMessageFormat, (label != null ? label : element), Min, Max));
-				}
-			}
+			if(!Values.ContainsKey(element) || string.IsNullOrEmpty(Values[element]) || !int.TryParse(Values[element], out value) || value < Min || value > Max)
+				InsertError(element, Min, Max);
 		}
 
 		protected override string GetDefaultErrorMessageFormat()
 		{
 			return "The field {0} must contain a value between {1} and {2}";
-		}
-
-		protected override string GetClientRule(string element)
-		{
-			return "range:[" + Min + "," + Max + "]";
-		}
-
-		protected override string GetClientMessage(string element)
-		{
-			if(string.IsNullOrEmpty(ErrorMessageFormat))
-				return null;
-
-			string label = ValidationSet.GetLocalizedText(element);
-			return string.Format("range:'{0}'", string.Format(ErrorMessageFormat, (label != null ? label : element), Min, Max)).Replace("'", "\'");
 		}
 	}
 }

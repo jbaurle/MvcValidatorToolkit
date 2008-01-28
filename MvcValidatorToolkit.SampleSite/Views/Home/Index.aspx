@@ -13,7 +13,7 @@
 		</li>
 		<li>
 			<%= Html.ActionLink("Sample #2", "Sample2", "Sample")%><br />
-			This form shows how to use...
+			This form shows a sample form with different input controls.
 		</li>
 	</ul>
 	

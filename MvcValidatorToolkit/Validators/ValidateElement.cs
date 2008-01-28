@@ -11,34 +11,34 @@ namespace System.Web.Mvc
 		public int MinLength { get; set; }
 		public int MaxLength { get; set; }
 
-		public ValidateElement(string element)
-			: base(element)
+		public ValidateElement(string elementsToValidate)
+			: base(elementsToValidate)
 		{
-			if(string.IsNullOrEmpty(element))
-				throw new ArgumentNullException("element");
 		}
 
 		public override Validator[] Translate()
 		{
-			string element = ElementsToValidate[0];
 			List<Validator> attributes = new List<Validator>();
 
-			if(Required)
-				attributes.Add(new ValidatePresence(element));
+			foreach(string element in ElementsToValidate)
+			{
+				if(Required)
+					attributes.Add(new ValidatePresence(element));
 
-			if(Min > 0 && Max > 0)
-				attributes.Add(new ValidateRange(element, Min, Max));
-			else if(Min > 0)
-				attributes.Add(new ValidateMin(element, Min));
-			else if(Max > 0)
-				attributes.Add(new ValidateMax(element, Max));
+				if(Min > 0 && Max > 0)
+					attributes.Add(new ValidateRange(element, Min, Max));
+				else if(Min > 0)
+					attributes.Add(new ValidateMin(element, Min));
+				else if(Max > 0)
+					attributes.Add(new ValidateMax(element, Max));
 
-			if(MinLength > 0 && MaxLength > 0)
-				attributes.Add(new ValidateRangeLength(element, MinLength, MaxLength));
-			else if(MinLength > 0)
-				attributes.Add(new ValidateMinLength(element, MinLength));
-			else if(MaxLength > 0)
-				attributes.Add(new ValidateMaxLength(element, MaxLength));
+				if(MinLength > 0 && MaxLength > 0)
+					attributes.Add(new ValidateRangeLength(element, MinLength, MaxLength));
+				else if(MinLength > 0)
+					attributes.Add(new ValidateMinLength(element, MinLength));
+				else if(MaxLength > 0)
+					attributes.Add(new ValidateMaxLength(element, MaxLength));
+			}
 
 			return attributes.ToArray();
 		}

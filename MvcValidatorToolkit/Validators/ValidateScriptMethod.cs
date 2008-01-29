@@ -74,6 +74,8 @@ namespace System.Web.Mvc
 		/// </summary>
 		protected override void Validate(string element)
 		{
+			// TODO: Call method with parameters or null
+
 			MethodInfo mi = ValidationSet.GetType().GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
 									.Where(m => m.Name.ToLower() == MethodName.ToLower()).SingleOrDefault();
 

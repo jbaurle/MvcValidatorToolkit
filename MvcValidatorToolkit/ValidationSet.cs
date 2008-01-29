@@ -9,6 +9,10 @@ using System.Text;
 
 namespace System.Web.Mvc
 {
+	/// <summary>
+	/// Represents the base functionality of a validation set class including the generation of client
+	/// scripts and the jQuery validation plugin settings.
+	/// </summary>
 	public abstract class ValidationSet
 	{
 		protected static string DefaultMessageResourceName = "ValidationSet";
@@ -22,11 +26,17 @@ namespace System.Web.Mvc
 		protected ResourceManager ResourceManager { get; set; }
 		protected ResourceManager ResourceManagerDefault { get; set; }
 
+		/// <summary>
+		/// Gets the instances of all validators defined for the implementing validation set.
+		/// </summary>
 		protected virtual ValidatorCollection GetValidators()
 		{
 			return new ValidatorCollection();
 		}
 
+		/// <summary>
+		/// Creates the complete client-side script for the defined and translated validators.
+		/// </summary>
 		public string CreateClientScript(NameValueCollection errorMessages)
 		{
 			List<string> methods = new List<string>();
@@ -35,6 +45,7 @@ namespace System.Web.Mvc
 			OrderedDictionary messages = new OrderedDictionary();
 			Dictionary<string, List<Type>> handledElements = new Dictionary<string, List<Type>>();
 
+			// Get defined validators and translates them into final list of validators
 			List<Validator> validators = new List<Validator>();
 			foreach(Validator validator in GetValidators().ToArray())
 				validators.AddRange(validator.Translate());
@@ -44,12 +55,14 @@ namespace System.Web.Mvc
 			sb.AppendFormat("function updateSettingsFor{0}(v){{", GetType().Name);
 			sb.AppendLine();
 
+			// Collect the client rules, messages and method definitions for each validator
 			foreach(Validator validator in validators.ToArray())
 			{
 				InitialzeValidator(validator);
 
 				ValidatorMethodData vmd = validator.GetClientMethodData();
 
+				// Get the method data if not already registered
 				if(vmd != null)
 				{
 					if(string.IsNullOrEmpty(vmd.Name) || string.IsNullOrEmpty(vmd.Function) || string.IsNullOrEmpty(vmd.ErrorMessage))
@@ -62,6 +75,7 @@ namespace System.Web.Mvc
 					}
 				}
 
+				// Get the rules and message for each element the validator is validating
 				if(validator.ElementsToValidate != null)
 				{
 					foreach(string element in validator.ElementsToValidate)
@@ -103,6 +117,7 @@ namespace System.Web.Mvc
 			sb.AppendLine("\tif(typeof(v)!='object')");
 			sb.AppendLine("\t\treturn null;");
 
+			// Generate client rules for the jQuery validation plugin
 			foreach(DictionaryEntry de in rules)
 			{
 				string list = string.Join("," + Environment.NewLine + "\t\t\t", ((List<string>)de.Value).ToArray());
@@ -117,6 +132,7 @@ namespace System.Web.Mvc
 				}
 			}
 
+			// Generate client messages for the jQuery validation plugin
 			foreach(DictionaryEntry de in messages)
 			{
 				string list = string.Join("," + Environment.NewLine + "\t\t\t", ((List<string>)de.Value).ToArray());
@@ -131,6 +147,7 @@ namespace System.Web.Mvc
 				}
 			}
 
+			// Generate client code to display server-side generated error messages
 			if(errorMessages != null && errorMessages.Count > 0)
 			{
 				List<string> list = new List<string>();
@@ -148,6 +165,10 @@ namespace System.Web.Mvc
 			return sb.ToString();
 		}
 
+		/// <summary>
+		/// Validates the rules for the implementing validator against the specified values
+		/// collection.
+		/// </summary>
 		public bool Validate(NameValueCollection values)
 		{
 			IsValid = true;
@@ -159,12 +180,16 @@ namespace System.Web.Mvc
 			else
 				Values = values;
 
+			// Copies the element value from the Values collection into field member of the 
+			// implementing validation set using reflection
 			UpdateFields();
 
+			// Get defined validators and translates them into final list of validators
 			List<Validator> validators = new List<Validator>();
 			foreach(Validator validator in GetValidators().ToArray())
 				validators.AddRange(validator.Translate());
 
+			// Excutes the validation process for each validator
 			foreach(Validator validator in validators.ToArray())
 			{
 				InitialzeValidator(validator);
@@ -183,6 +208,8 @@ namespace System.Web.Mvc
 				}
 			}
 
+			// Call a final and overall validation method for the validation set and 
+			// catch all ValidatorExceptions
 			try
 			{
 				OnValidate();
@@ -201,12 +228,20 @@ namespace System.Web.Mvc
 			return IsValid;
 		}
 
+		/// <summary>
+		/// When overridden allows to execute final validations after all defined validators have
+		/// been executed.
+		/// </summary>
 		protected virtual void OnValidate()
 		{
 		}
 
+		/// <summary>
+		/// Gets the localized text for the given key by looking up the App_GlobalResources folder.
+		/// </summary>
 		public virtual string GetLocalizedText(string key)
 		{
+			// Intializes the resource managers if not already done
 			if(ResourceManagerDefault == null && ResourceManager == null)
 			{
 				Assembly assembly = null;
@@ -217,18 +252,21 @@ namespace System.Web.Mvc
 				}
 				catch { return null; }
 
-				MessageResourceNameAttribute[] attributes =
-					(MessageResourceNameAttribute[])GetType().GetCustomAttributes(typeof(MessageResourceNameAttribute), true);
+				MessageResourceNameAttribute[] attributes = (MessageResourceNameAttribute[])GetType().GetCustomAttributes(typeof(MessageResourceNameAttribute), true);
 
+				// If the MessageResource attribute for the implementing validation set is set, than
+				// initialize the ResourceManager
 				if(attributes.Length > 0)
 					ResourceManager = new ResourceManager("Resources." + attributes[0].ResourceName, assembly);
 
+				// Initialize the standard ResourceManager
 				ResourceManagerDefault = new ResourceManager("Resources." +
 					(string.IsNullOrEmpty(DefaultMessageResourceName) ? "ValidationSet" : DefaultMessageResourceName), assembly);
 			}
 
 			string text;
 
+			// Get the text for the key from custom resource file if defined
 			if(ResourceManager != null)
 			{
 				try
@@ -239,6 +277,7 @@ namespace System.Web.Mvc
 				catch { }
 			}
 
+			// Get the text for the key from default resource file 
 			if(ResourceManagerDefault != null)
 			{
 				try
@@ -259,6 +298,31 @@ namespace System.Web.Mvc
 			return null;
 		}
 
+		/// <summary>
+		/// Initializes the specified validator with the number of used validator types and the
+		/// current validation set.
+		/// </summary>
+		void InitialzeValidator(Validator validator)
+		{
+			if(UsedTypes == null)
+				UsedTypes = new Dictionary<Type, int>();
+
+			Type vt = validator.GetType();
+
+			// Stores the number of same validator types (e.g. used in 
+			// ValidatesScriptMethod)
+			if(UsedTypes.ContainsKey(vt))
+				UsedTypes[vt] += 1;
+			else
+				UsedTypes.Add(vt, 1);
+
+			validator.Initialize(this, UsedTypes[vt]);
+		}
+
+		/// <summary>
+		/// Copies the element value from the Values collection into field member of the 
+		/// implementing validation set using reflection.
+		/// </summary>
 		void UpdateFields()
 		{
 			FieldInfo[] fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
@@ -270,6 +334,9 @@ namespace System.Web.Mvc
 			}
 		}
 
+		/// <summary>
+		/// Updates the internal list of invalid elements.
+		/// </summary>
 		void UpdateInvalidElements(string[] elements)
 		{
 			foreach(string element in elements)
@@ -277,21 +344,6 @@ namespace System.Web.Mvc
 				if(InvalidElements.Contains(element) == false)
 					InvalidElements.Add(element);
 			}
-		}
-
-		void InitialzeValidator(Validator validator)
-		{
-			if(UsedTypes == null)
-				UsedTypes = new Dictionary<Type, int>();
-
-			Type vt = validator.GetType();
-
-			if(UsedTypes.ContainsKey(vt))
-				UsedTypes[vt] += 1;
-			else
-				UsedTypes.Add(vt, 1);
-
-			validator.Initialize(this, UsedTypes[vt]);
 		}
 	}
 }

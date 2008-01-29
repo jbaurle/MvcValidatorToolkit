@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace System.Web.Mvc
 {
+	/// <summary>
+	/// Represents a validator which validates the defined element list against the given validation
+	/// rules by creating the required validators.
+	/// </summary>
 	public class ValidateElement : Validator
 	{
 		public bool Required { get; set; }
@@ -11,11 +15,17 @@ namespace System.Web.Mvc
 		public int MinLength { get; set; }
 		public int MaxLength { get; set; }
 
+		/// <summary>
+		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// </summary>
 		public ValidateElement(string elementsToValidate)
 			: base(elementsToValidate)
 		{
 		}
 
+		/// <summary>
+		/// Translates and returns the validator instances to use for the validation process.
+		/// </summary>
 		public override Validator[] Translate()
 		{
 			List<Validator> attributes = new List<Validator>();
@@ -43,10 +53,14 @@ namespace System.Web.Mvc
 			return attributes.ToArray();
 		}
 
+		/// <summary>
+		/// Validates the given element using the Values collection nand generates an error if 
+		/// invalid.
+		/// </summary>
 		protected override void Validate(string element)
 		{
-			// NOTE: This method is never called because the Translate method
-			// is not returning this instance as validator to use. 
+			// NOTE: This method is never called because the Translate method is not returning 
+			// this instance as validator to use.
 		}
 	}
 }

@@ -39,5 +39,31 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 			else
 				RenderView("Sample2");
 		}
+
+		[ControllerAction]
+		public void Sample4()
+		{
+			RenderView("Sample4");
+		}
+
+		[ControllerAction]
+		[ValidationSet(typeof(Sample4aValidationSet))]
+		public void Sample4aProcessing()
+		{
+			if(this.ValidateForm())
+				RenderView("SampleResult");
+			else
+				RenderView("Sample4");
+		}
+
+		[ControllerAction]
+		[ValidationSet(typeof(Sample4bValidationSet))]
+		public void Sample4bProcessing()
+		{
+			if(this.ValidateForm())
+				RenderView("SampleResult");
+			else
+				RenderView("Sample4");
+		}
 	}
 }

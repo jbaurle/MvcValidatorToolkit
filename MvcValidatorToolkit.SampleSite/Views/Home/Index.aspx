@@ -9,11 +9,15 @@
 	<ul>
 		<li>
 			<%= Html.ActionLink("Sample #1", "Sample1", "Sample")%><br />
-			This form shows how to use a simple validation set using localized messages defined in the App_GlobalResources folder.
+			This page shows how to use a simple validation set using localized messages defined in the App_GlobalResources folder.
 		</li>
 		<li>
 			<%= Html.ActionLink("Sample #2", "Sample2", "Sample")%><br />
-			This form shows a sample form with different input controls.
+			This page shows a sample form with different input controls.
+		</li>
+		<li>
+			<%= Html.ActionLink("Sample Multi-Form", "Sample4", "Sample")%><br />
+			This page shows a sample with tow different forms.
 		</li>
 	</ul>
 	

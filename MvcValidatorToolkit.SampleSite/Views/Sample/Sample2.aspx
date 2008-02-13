@@ -14,7 +14,7 @@
 	</script>
 
 	<style type="text/css">
-		label.error, #sample2FormSummary {
+		label.error {
 			color:red;
 		}
 	</style> 
@@ -23,13 +23,11 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-	<h2>Sample Form #1</h2>
+	<h2>Sample Form #2</h2>
 
 	<p><i><b>NOTE:</b> The form is displaying the error messages next to the field using the errorPlacement option 
 		of the jQuery validation plugin.</i></p>
 	
-	<div id="sample2FormSummary" style="display:none;"><%= Resources.ValidationSet.ValidationSummary_HeaderText %><ul></ul></div>
-
 	<form id="sample2Form" action="/Sample/Sample2Processing" method="post"> 
 	<table>
 		<tr>

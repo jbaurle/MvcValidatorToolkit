@@ -14,7 +14,7 @@ namespace System.Web.Mvc
 	/// <summary>
 	/// Represents an attribute class to set the name of the validation set.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
 	public class ValidationSetAttribute : Attribute
 	{
 		public ValidationSet ValidationSet { get; private set; }

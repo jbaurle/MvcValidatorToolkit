@@ -6,7 +6,6 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 {
 	public class SampleController : Controller
 	{
-		[ControllerAction]
 		public void Sample1(string lc)
 		{
 			ViewData["LanguageCode"] = string.IsNullOrEmpty(lc) ? "en" : "de";
@@ -14,7 +13,6 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 			RenderView("Sample1");
 		}
 
-		[ControllerAction]
 		[ValidationSet(typeof(Sample1ValidationSet))]
 		public void Sample1Processing()
 		{
@@ -24,13 +22,11 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 				RenderView("Sample1");
 		}
 
-		[ControllerAction]
 		public void Sample2()
 		{
 			RenderView("Sample2");
 		}
 
-		[ControllerAction]
 		[ValidationSet(typeof(Sample2ValidationSet))]
 		public void Sample2Processing()
 		{
@@ -40,13 +36,11 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 				RenderView("Sample2");
 		}
 
-		[ControllerAction]
 		public void Sample4()
 		{
 			RenderView("Sample4");
 		}
 
-		[ControllerAction]
 		[ValidationSet(typeof(Sample4aValidationSet))]
 		public void Sample4aProcessing()
 		{
@@ -56,7 +50,6 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 				RenderView("Sample4");
 		}
 
-		[ControllerAction]
 		[ValidationSet(typeof(Sample4bValidationSet))]
 		public void Sample4bProcessing()
 		{

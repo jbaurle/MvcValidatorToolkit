@@ -5,6 +5,5 @@
 	    - ValidateCreditCardNumber
 	    - ValidateCompareTo
 	    - ValidateEmailAddress
-	    - ValidateRegex
 	    - ValidateUrl
 	    

@@ -82,6 +82,7 @@
     <Compile Include="Validators\ValidatePresence.cs" />
     <Compile Include="Validators\ValidateRange.cs" />
     <Compile Include="Validators\ValidateRangeLength.cs" />
+    <Compile Include="Validators\ValidatePattern.cs" />
     <Compile Include="Validators\ValidateScriptMethod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

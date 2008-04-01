@@ -90,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationSet.resx</DependentUpon>
     </Compile>
+    <Compile Include="Code\Sample3ViewData.cs" />
     <Compile Include="Code\Sample4ValidationSet.cs" />
     <Compile Include="Code\Sample3ValidationSet.cs" />
     <Compile Include="Code\SampleSiteViewPage.cs">
@@ -105,6 +106,10 @@
     </Compile>
     <Compile Include="Views\Home\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Sample\Sample3.aspx.cs">
+      <DependentUpon>Sample3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Sample\Sample4.aspx.cs">
@@ -175,6 +180,7 @@
       <LastGenOutput>Sample1ValidationSet.de.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Sample\Sample3.aspx" />
     <Content Include="Views\Sample\Sample4.aspx" />
     <Content Include="Views\Sample\Sample2.aspx" />
     <Content Include="Views\Sample\SampleResult.aspx" />

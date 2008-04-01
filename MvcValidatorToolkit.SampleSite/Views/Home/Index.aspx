@@ -16,6 +16,11 @@
 			This page shows a sample form with different input controls.
 		</li>
 		<li>
+			<%= Html.ActionLink("Sample #3", "Sample3", "Sample")%><br />
+			This page shows a sample form with different input controls and strongly typed view data.
+		</li>
+
+		<li>
 			<%= Html.ActionLink("Sample Multi-Form", "Sample4", "Sample")%><br />
 			This page shows a sample with tow different forms.
 		</li>

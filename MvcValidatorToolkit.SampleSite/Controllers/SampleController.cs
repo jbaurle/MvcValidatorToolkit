@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace MvcValidatorToolkit.SampleSite.Controllers
 {
@@ -35,6 +36,25 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 			else
 				RenderView("Sample2");
 		}
+
+        public void Sample3()
+        {
+            Sample3ViewData viewData = new Sample3ViewData();
+            viewData.MembershipList = new List<MembershipData>();
+            viewData.MembershipList.Add(new MembershipData("B", "Basic"));
+            viewData.MembershipList.Add(new MembershipData("P", "Premium"));
+            RenderView("Sample3", viewData);
+        }
+
+        [ValidationSet(typeof(Sample3ValidationSet))]
+        public void Sample3Processing()
+        {
+            if (this.ValidateForm())
+                RenderView("SampleResult");
+            else
+                RenderView("Sample3");
+        }
+
 
 		public void Sample4()
 		{

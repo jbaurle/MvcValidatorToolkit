@@ -1,40 +1,26 @@
 ﻿using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using System.Web.SessionState;
-using System.Xml.Linq;
 using System.Web.Routing;
 
 namespace MvcValidatorToolkit.SampleSite
 {
-	public class Global : System.Web.HttpApplication
+	public class Global : HttpApplication
 	{
+		public static void RegisterRoutes(RouteCollection routes)
+		{
+			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            // Note: Change the URL to "{controller}.mvc/{action}/{id}" to enable
-            //       automatic support on IIS6 and IIS7 classic mode
+			routes.MapRoute(
+				 "Default",
+				 "{controller}/{action}/{id}",
+				 new { controller = "Home", action = "Index", id = "" }
+			);
+		}
 
-            routes.Add(new Route("{controller}/{action}/{id}", new MvcRouteHandler())
-            {
-                Defaults = new RouteValueDictionary(new { action = "Index", id = "" }),
-            });
-
-            routes.Add(new Route("Default.aspx", new MvcRouteHandler())
-            {
-                Defaults = new RouteValueDictionary(new { controller = "Home", action = "Index", id = "" }),
-            });
-        }
-
-        protected void Application_Start(object sender, EventArgs e)
-        {
-            RegisterRoutes(RouteTable.Routes);
-        }
-
+		protected void Application_Start()
+		{
+			RegisterRoutes(RouteTable.Routes);
+		}
 	}
 }

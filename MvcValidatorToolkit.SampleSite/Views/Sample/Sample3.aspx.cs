@@ -3,8 +3,9 @@ using System.Web.Mvc;
 
 namespace MvcValidatorToolkit.SampleSite.Sample
 {
-	[ValidationSet(typeof(Sample3ValidationSet))]
-	public partial class Sample3 : ViewPage<Sample3ViewData>
+	[ValidationSet(typeof(Sample3aValidationSet))]
+	[ValidationSet(typeof(Sample3bValidationSet))]
+	public partial class Sample3 : SampleSiteViewPage
 	{
 	}
 }

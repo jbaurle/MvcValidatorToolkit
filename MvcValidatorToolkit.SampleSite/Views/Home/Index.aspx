@@ -16,15 +16,12 @@
 			This page shows a sample form with different input controls.
 		</li>
 		<li>
-			<%= Html.ActionLink("Sample #3", "Sample3", "Sample")%><br />
-			This page shows a sample form with different input controls and strongly typed view data.
-		</li>
-
-		<li>
-			<%= Html.ActionLink("Sample Multi-Form", "Sample4", "Sample")%><br />
+			<%= Html.ActionLink("Sample Multi-Form", "Sample3", "Sample")%><br />
 			This page shows a sample with tow different forms.
 		</li>
 	</ul>
+	
+	<p>This version of the Validator Toolkit works with the preview release 3 of ASP.NET MVC.</p>
 	
 </asp:Content>
 

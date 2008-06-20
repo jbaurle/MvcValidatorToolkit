@@ -15,5 +15,15 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 		{
 			RenderView("About");
 		}
+
+		void RenderView(string viewName)
+		{
+			View(viewName).ExecuteResult(ControllerContext);
+		}
+
+		void RenderView(string viewName, object model)
+		{
+			View(viewName, model).ExecuteResult(ControllerContext);
+		}
 	}
 }

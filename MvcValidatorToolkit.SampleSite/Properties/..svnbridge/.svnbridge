@@ -4,4 +4,10 @@ bin
 *.user
 *.suo
 *.vsmdi
+</Value></Property><Property><Name>svn:ignore</Name><Value>TestResults
+obj
+bin
+*.user
+*.suo
+*.vsmdi
 </Value></Property></Properties></ItemProperties>

@@ -37,46 +37,37 @@ namespace MvcValidatorToolkit.SampleSite.Controllers
 				RenderView("Sample2");
 		}
 
-        public void Sample3()
-        {
-            Sample3ViewData viewData = new Sample3ViewData();
-            viewData.MembershipList = new List<MembershipData>();
-            viewData.MembershipList.Add(new MembershipData("B", "Basic"));
-            viewData.MembershipList.Add(new MembershipData("P", "Premium"));
-            RenderView("Sample3", viewData);
-        }
-
-        [ValidationSet(typeof(Sample3ValidationSet))]
-        public void Sample3Processing()
-        {
-            if (this.ValidateForm())
-                RenderView("SampleResult");
-            else
-                RenderView("Sample3");
-        }
-
-
-		public void Sample4()
+		public void Sample3()
 		{
-			RenderView("Sample4");
+			RenderView("Sample3");
 		}
 
-		[ValidationSet(typeof(Sample4aValidationSet))]
-		public void Sample4aProcessing()
+		[ValidationSet(typeof(Sample3aValidationSet))]
+		public void Sample3aProcessing()
 		{
 			if(this.ValidateForm())
 				RenderView("SampleResult");
 			else
-				RenderView("Sample4");
+				RenderView("Sample3");
 		}
 
-		[ValidationSet(typeof(Sample4bValidationSet))]
-		public void Sample4bProcessing()
+		[ValidationSet(typeof(Sample3bValidationSet))]
+		public void Sample3bProcessing()
 		{
 			if(this.ValidateForm())
 				RenderView("SampleResult");
 			else
-				RenderView("Sample4");
+				RenderView("Sample3");
+		}
+
+		void RenderView(string viewName)
+		{
+			View(viewName).ExecuteResult(ControllerContext);
+		}
+
+		void RenderView(string viewName, object model)
+		{
+			View(viewName, model).ExecuteResult(ControllerContext);
 		}
 	}
 }

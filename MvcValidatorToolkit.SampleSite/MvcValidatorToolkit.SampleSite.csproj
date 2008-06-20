@@ -38,25 +38,24 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Abstractions, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft ASP.NET MVC Preview 2\Assemblies\System.Web.Abstractions.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC Preview 3\Assemblies\System.Web.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft ASP.NET MVC Preview 2\Assemblies\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC Preview 3\Assemblies\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Routing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Microsoft ASP.NET MVC Preview 2\Assemblies\System.Web.Routing.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC Preview 3\Assemblies\System.Web.Routing.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -64,7 +63,6 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Web.config" />
@@ -90,8 +88,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationSet.resx</DependentUpon>
     </Compile>
-    <Compile Include="Code\Sample3ViewData.cs" />
-    <Compile Include="Code\Sample4ValidationSet.cs" />
     <Compile Include="Code\Sample3ValidationSet.cs" />
     <Compile Include="Code\SampleSiteViewPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -101,6 +97,10 @@
     <Compile Include="Code\ValidateBuga.cs" />
     <Compile Include="Controllers\SampleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -110,10 +110,6 @@
     </Compile>
     <Compile Include="Views\Sample\Sample3.aspx.cs">
       <DependentUpon>Sample3.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Sample\Sample4.aspx.cs">
-      <DependentUpon>Sample4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Sample\Sample2.aspx.cs">
@@ -143,7 +139,6 @@
     <Content Include="Content\jQuery.Delegate.js" />
     <Content Include="Content\jQuery.Validation.js" />
     <Content Include="Content\Site.css" />
-    <Content Include="Default.aspx" />
     <Content Include="Views\Sample\Sample1.aspx" />
     <Content Include="Views\Shared\Site.Master" />
   </ItemGroup>
@@ -180,8 +175,9 @@
       <LastGenOutput>Sample1ValidationSet.de.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Views\Sample\Sample3.aspx" />
-    <Content Include="Views\Sample\Sample4.aspx" />
     <Content Include="Views\Sample\Sample2.aspx" />
     <Content Include="Views\Sample\SampleResult.aspx" />
   </ItemGroup>

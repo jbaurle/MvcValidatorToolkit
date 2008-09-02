@@ -4,6 +4,6 @@
 	 - Add new validators:
 	    - ValidateCreditCardNumber
 	    - ValidateCompareTo
-	    - ValidateEmailAddress
 	    - ValidateUrl
+	    - ValidateEmailAddress
 	    

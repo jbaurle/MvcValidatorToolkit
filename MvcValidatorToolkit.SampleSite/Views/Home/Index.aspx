@@ -21,7 +21,5 @@
 		</li>
 	</ul>
 	
-	<p>This version of the Validator Toolkit works with the preview release 3 of ASP.NET MVC.</p>
-	
 </asp:Content>
 

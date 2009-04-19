@@ -7,7 +7,7 @@ namespace System.Web.Mvc
 	/// Represents a client-side validator definition used in conjunction with the jQuery
 	/// validation plugin.
 	/// </summary>
-	public class ValidatorMethodData
+	public class ValidatorMethodData 
 	{
 		public string Name { get; set; }
 		public string Function { get; set; }

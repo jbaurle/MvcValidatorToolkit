@@ -12,7 +12,7 @@ namespace System.Web.Mvc
 		public int Min { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidateMin class with the given elements to validate.
 		/// </summary>
 		public ValidateMin(string elementsToValidate)
 			: base(elementsToValidate)
@@ -20,7 +20,7 @@ namespace System.Web.Mvc
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate
+		/// Initializes a new instance of the ValidateMin class with the given elements to validate
 		/// and min integer value.
 		/// </summary>
 		public ValidateMin(string elementsToValidate, int min)

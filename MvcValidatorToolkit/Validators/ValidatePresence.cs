@@ -9,7 +9,7 @@ namespace System.Web.Mvc
 	public class ValidatePresence : Validator
 	{
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidatePresence class with the given elements to validate.
 		/// </summary>
 		public ValidatePresence(string elementsToValidate)
 			: base(elementsToValidate)

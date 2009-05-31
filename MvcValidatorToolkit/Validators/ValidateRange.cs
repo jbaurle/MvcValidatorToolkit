@@ -13,7 +13,7 @@ namespace System.Web.Mvc
 		public int Max { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidateRange class with the given elements to validate.
 		/// </summary>
 		public ValidateRange(string elementsToValidate)
 			: base(elementsToValidate)
@@ -21,7 +21,7 @@ namespace System.Web.Mvc
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate
+		/// Initializes a new instance of the ValidateRange class with the given elements to validate
 		/// and min and max integer values.
 		/// </summary>
 		public ValidateRange(string elementsToValidate, int min, int max)

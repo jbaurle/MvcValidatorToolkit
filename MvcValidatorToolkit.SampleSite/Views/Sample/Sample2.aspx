@@ -65,8 +65,13 @@
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
+			<td>Credit Card Number</td>
+			<td><input type="text" id="creditCardNumber" name="creditCardNumber" /></td>
 			<td>&nbsp;</td>
-			<td><input type="checkbox" id="Checkbox1" name="termsOfService" /> I accept the terms of service</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="checkbox" id="termsOfService" name="termsOfService" /> I accept the terms of service</td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>

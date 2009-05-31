@@ -4,4 +4,13 @@ bin
 *.user
 *.suo
 *.vsmdi
+</Value></Property><Property><Name>svn:ignore</Name><Value>*.suo
+*.ncb
+*.user
+_ReSharper.*
+TestResults
+obj
+bin
+*.vsmdi
+*.trc
 </Value></Property></Properties></ItemProperties>

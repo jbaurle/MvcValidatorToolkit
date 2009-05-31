@@ -137,9 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\jDate.js" />
-    <Content Include="Content\jQuery.Core.js" />
     <Content Include="Content\jQuery.Delegate.js" />
-    <Content Include="Content\jQuery.Validation.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Views\Sample\Sample1.aspx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -177,6 +175,8 @@
       <LastGenOutput>Sample1ValidationSet.de.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\jQuery.Core.js" />
+    <Content Include="Content\jQuery.Validation.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Views\Sample\Sample3.aspx" />

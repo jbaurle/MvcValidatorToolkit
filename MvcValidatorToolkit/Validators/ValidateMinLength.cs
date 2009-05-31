@@ -12,7 +12,7 @@ namespace System.Web.Mvc
 		public int MinLength { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidateMinLength class with the given elements to validate.
 		/// </summary>
 		public ValidateMinLength(string elementsToValidate)
 			: base(elementsToValidate)
@@ -20,7 +20,7 @@ namespace System.Web.Mvc
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate
+		/// Initializes a new instance of the ValidateMinLength class with the given elements to validate
 		/// and min length value.
 		/// </summary>
 		public ValidateMinLength(string elementsToValidate, int minLength)

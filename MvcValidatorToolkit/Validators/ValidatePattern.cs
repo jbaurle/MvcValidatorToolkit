@@ -15,7 +15,7 @@ namespace System.Web.Mvc
 		public string ScriptPattern { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidatePattern class with the given elements to validate.
 		/// </summary>
 		public ValidatePattern(string elementsToValidate)
 			: base(elementsToValidate)

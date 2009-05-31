@@ -11,7 +11,7 @@ namespace System.Web.Mvc
 		public int Max { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidateMax class with the given elements to validate.
 		/// </summary>
 		public ValidateMax(string elementsToValidate)
 			: base(elementsToValidate)
@@ -19,7 +19,7 @@ namespace System.Web.Mvc
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate
+		/// Initializes a new instance of the ValidateMax class with the given elements to validate
 		/// and the max value.
 		/// </summary>
 		public ValidateMax(string elementsToValidate, int max)

@@ -14,7 +14,7 @@ namespace System.Web.Mvc
 		public string Parameters { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate.
+		/// Initializes a new instance of the ValidateScriptMethod class with the given elements to validate.
 		/// </summary>
 		public ValidateScriptMethod(string elementsToValidate)
 			: base(elementsToValidate)
@@ -22,7 +22,7 @@ namespace System.Web.Mvc
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the ValidateDate class with the given elements to validate
+		/// Initializes a new instance of the ValidateScriptMethod class with the given elements to validate
 		/// and the custom method.
 		/// </summary>
 		public ValidateScriptMethod(string elementsToValidate, string methodName)

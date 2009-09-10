@@ -137,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\jDate.js" />
-    <Content Include="Content\jQuery.Delegate.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Views\Sample\Sample1.aspx" />
     <Content Include="Views\Shared\Site.Master" />

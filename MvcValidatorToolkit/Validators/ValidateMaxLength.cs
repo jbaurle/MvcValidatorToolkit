@@ -37,7 +37,7 @@ namespace System.Web.Mvc
 		/// </summary>
 		public override string GetClientRule(string element)
 		{
-			return "maxLength:" + MaxLength;
+			return "maxlength:" + MaxLength;
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace System.Web.Mvc
 		/// </summary>
 		public override string GetClientMessage(string element)
 		{
-			return string.Format("maxLength:'{0}'", GetLocalizedErrorMessage(element, MaxLength)).Replace("'", "\'");
+			return string.Format("maxlength:'{0}'", GetLocalizedErrorMessage(element, MaxLength)).Replace("'", "\'");
 		}
 
 		/// <summary>

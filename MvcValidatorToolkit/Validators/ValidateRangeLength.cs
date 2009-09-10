@@ -41,7 +41,7 @@ namespace System.Web.Mvc
 		/// </summary>
 		public override string GetClientRule(string element)
 		{
-			return "rangeLength:[" + MinLength + "," + MaxLength + "]";
+			return "rangelength:[" + MinLength + "," + MaxLength + "]";
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace System.Web.Mvc
 		/// </summary>
 		public override string GetClientMessage(string element)
 		{
-			return string.Format("rangeLength:'{0}'", GetLocalizedErrorMessage(element, MinLength, MaxLength)).Replace("'", "\'");
+			return string.Format("rangelength:'{0}'", GetLocalizedErrorMessage(element, MinLength, MaxLength)).Replace("'", "\'");
 		}
 
 		/// <summary>

@@ -37,7 +37,7 @@ namespace System.Web.Mvc
 		/// </summary>
 		public override string GetClientRule(string element)
 		{
-			return "minLength:" + MinLength;
+			return "minlength:" + MinLength;
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace System.Web.Mvc
 		/// </summary>
 		public override string GetClientMessage(string element)
 		{
-			return string.Format("minLength:'{0}'", GetLocalizedErrorMessage(element, MinLength)).Replace("'", "\'");
+			return string.Format("minlength:'{0}'", GetLocalizedErrorMessage(element, MinLength)).Replace("'", "\'");
 		}
 
 		/// <summary>

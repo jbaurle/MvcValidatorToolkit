@@ -7,7 +7,6 @@
 
 	<script type="text/javascript" src="../../Content/jDate.js"></script>
 	<script type="text/javascript" src="../../Content/jQuery.Core.js"></script>
-	<script type="text/javascript" src="../../Content/jQuery.Delegate.js"></script>
 	<script type="text/javascript" src="../../Content/jQuery.Validation.js"></script>
 
 	<link href="../../Content/Site.css" rel="stylesheet" type="text/css" />

@@ -32,6 +32,26 @@ namespace System.Web.Mvc
 			// Get instance of the validation set class
 			ValidationSet vs = attributes[0].ValidationSet;
 
+			return ValidateForm(controller, vs);
+		}
+
+		public static bool ValidateForm<TValidationSet>(this Controller controller) where TValidationSet : ValidationSet
+		{
+			var validationSet = (TValidationSet)Activator.CreateInstance(typeof(TValidationSet));
+
+			return ValidateForm(controller, validationSet);
+		}
+
+		public static bool ValidateForm<TValidationSet, TModel>(this Controller controller, TModel model) where TValidationSet : ValidationSet<TModel>
+		{
+			var validationSet = (TValidationSet)Activator.CreateInstance(typeof(TValidationSet));
+			validationSet.Model = model;
+
+			return ValidateForm(controller, validationSet);
+		}
+
+		static bool ValidateForm(Controller controller, ValidationSet vs)
+		{
 			// Validate HTML form (Request.Form) and save the result in the ViewData collection
 			if(vs.Validate(controller.Request.Form))
 				controller.ViewData[vs.GetType().Name + ".ErrorMessages"] = null;

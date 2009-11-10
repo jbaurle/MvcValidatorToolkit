@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcValidatorToolkit.SampleS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{DF4E9815-91AE-4106-B68D-821938C1A784}"
 	ProjectSection(SolutionItems) = preProject
-		TODO.txt = TODO.txt
+		Credits.txt = Credits.txt
 	EndProjectSection
 EndProject
 Global

@@ -1,0 +1,8 @@
+
+	CREDITS AND CONTRIBUTORS
+	
+	Jürgen Bäurle (Main Developer), jbaurle@parago.de
+	
+	Igor Zelmanovich (Contributor)
+	Andy Sleigh (Contributor)
+	

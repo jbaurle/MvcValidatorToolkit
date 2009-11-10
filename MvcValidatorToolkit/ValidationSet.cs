@@ -11,6 +11,16 @@ namespace System.Web.Mvc
 {
 	/// <summary>
 	/// Represents the base functionality of a validation set class including the generation of client
+	/// scripts and the jQuery validation plugin settings. TModel is the data type of the model to 
+	/// store.
+	/// </summary>
+	public abstract class ValidationSet<TModel> : ValidationSet
+	{
+		public TModel Model { get; set; }
+	}
+
+	/// <summary>
+	/// Represents the base functionality of a validation set class including the generation of client
 	/// scripts and the jQuery validation plugin settings.
 	/// </summary>
 	public abstract class ValidationSet

@@ -1,9 +1,0 @@
-
-	TODO:
-	
-	 - Add new validators:
-	    - ValidateCreditCardNumber
-	    - ValidateCompareTo
-	    - ValidateUrl
-	    - ValidateEmailAddress
-	    

@@ -74,21 +74,14 @@ Then, you add the following script and methods to your view:
 ...
 
 <form id="loginForm" action="/Authenticate" method="post"> 
-...
+	...
 </form>
 
 <% this.RenderValidationSetScripts(); %>
 ```
 
-This all to validate the login HTML form on the client and server-side. 
+This is all to validate the login HTML form on the client and server-side. 
 
 More documentation take a look at the article on CodeProject.com: [http://www.codeproject.com/KB/aspnet/MvcValidatorToolkit.aspx](http://www.codeproject.com/KB/aspnet/MvcValidatorToolkit.aspx)
 
 Please see the source code with the included sample site for more examples. You will also find a multi-form example showing how to use the toolkit in conjunction with multiple forms on one HTML page (view).
-
-**Author**
-
-Jürgen Bäurle
-
-[http://jbaurle.wordpress.com](http://jbaurle.wordpress.com) (Blog)
-[http://www.parago.de/jbaurle](http://www.parago.de/jbaurle) (Homepage)

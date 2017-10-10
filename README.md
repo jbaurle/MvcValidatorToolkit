@@ -8,13 +8,13 @@ More documentation take a look at the article on CodeProject.com: [http://www.co
 
 See also my homepage on Parago.de:  [http://www.parago.de](http://www.parago.de)
 
-![](Home_Screenshot1.png)
+![](docs/Screenshot1.png)
 
-More [Screenshots](Screenshots) here on this page.
+More [Screenshots](docs/Screenshots.md) here on this page.
 
 Basically, you will create a validation set class which derives from ValidationSet base class:
 
-{{
+```cs
 public class LoginValidationSet : ValidationSet
 {
 	string Username = "";
@@ -35,10 +35,11 @@ public class LoginValidationSet : ValidationSet
 			throw new ValidatorException("username", "The username/password combination is not valid");
 	}
 }
-}}
+```
+
 Then, you will attach it to the view and the HTML form processing action using the ValidationSetAttribute:
 
-{{
+```cs
 public void Login()
 {
 	RenderView("Login");
@@ -53,16 +54,17 @@ public void Authenticate()
 		RenderView("Login");
 }
 
-...
+//...
 
 [ValidationSet(typeof(LoginValidationSet))](ValidationSet(typeof(LoginValidationSet)))
 public partial class LoginView : ViewPage
 {
 }
-}}
+```
+
 Then, you add the following script and methods to your view:
 
-{{
+```html
 <script type="text/javascript">
 	$(function(){
 		updateSettingsForLoginValidationSet($('#loginForm').validate({rules:{} }));
@@ -76,7 +78,8 @@ Then, you add the following script and methods to your view:
 </form>
 
 <% this.RenderValidationSetScripts(); %>
-}}
+```
+
 This all to validate the login HTML form on the client and server-side. 
 
 More documentation take a look at the article on CodeProject.com: [http://www.codeproject.com/KB/aspnet/MvcValidatorToolkit.aspx](http://www.codeproject.com/KB/aspnet/MvcValidatorToolkit.aspx)
